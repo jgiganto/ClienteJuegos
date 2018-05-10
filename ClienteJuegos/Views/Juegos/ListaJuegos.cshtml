@@ -48,7 +48,8 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Comprar", "Comprar", new { idcliente = 1, idjuego= item.IdJuego },
+               new AjaxOptions { HttpMethod = "POST" }) |
                 @Html.ActionLink("Details", "Juego", new { IdJuego = item.IdJuego  }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

@@ -15,7 +15,8 @@ namespace ClienteJuegos.Models
 
         public ModeloJuegos()
         {
-            this.UrlApi = "http://apijuegosjgd.azurewebsites.net/";
+            this.UrlApi = "http://localhost:64357/";
+                //"ttp://apijuegosjgd.azurewebsites.net/";
             this.media =
                 new MediaTypeWithQualityHeaderValue("application/json");
 
@@ -66,5 +67,50 @@ namespace ClienteJuegos.Models
                 }
             }
         }
+       
+        public async Task Comprar(int idcliente, int idjuego)
+        {
+            using (HttpClient cliente = new HttpClient())
+            {
+                String peticion = "api/comprar/" + idcliente + "/" + idjuego;
+                cliente.BaseAddress = new Uri(this.UrlApi);
+                cliente.DefaultRequestHeaders.Accept.Clear();
+                cliente.DefaultRequestHeaders.Accept.Add(media);
+                StringContent content =
+                    new StringContent(""
+                    , System.Text.Encoding.UTF8, "application/json");
+                await cliente.PostAsync(peticion, content);
+            }
+        }
+
+       // api/ListaPedidos/{idcliente
+
+
+        public async Task<Pedidos> PedidosCliente(int idcliente)
+        {
+            using (HttpClient cliente = new HttpClient())
+            {
+                String peticion = "api/ListaPedidos/" + idcliente;
+                cliente.BaseAddress = new Uri(this.UrlApi);
+                cliente.DefaultRequestHeaders.Accept.Clear();
+                cliente.DefaultRequestHeaders.Accept.Add(media);
+                HttpResponseMessage respuesta =
+                    await cliente.GetAsync(peticion);
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    Pedidos pedidos  =
+                        await respuesta.Content.ReadAsAsync<Pedidos>();
+                    return pedidos;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
     }
+
 }
+ 

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Comprar";
+}
+
+<h2>Comprar juego</h2>
+
+@using (Html.BeginForm())
+{
+
+    <input type="text" name="idcliente" value="1" hidden> 
+    <input type="text" name="idjuego" value="1" hidden>
+    <button type="submit" id="boton" name="boton">enviar</button>
+}
+
+
+@Html.ActionLink("Back to List", "ListaJuegos")
+

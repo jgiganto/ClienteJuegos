@@ -19,5 +19,14 @@ namespace ClienteJuegos.Models
         public int Precio { get; set; }
         [JsonProperty("CANTIDAD")]
         public int Cantidad { get; set; }
+        [JsonProperty("IDPEDIDO")]
+        public int IdPedido { get; set; }
+        [JsonProperty("TITULO")]
+        public string Titulo { get; set; }
     }
 }
+
+
+
+ 
+ 
